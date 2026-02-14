@@ -152,6 +152,17 @@ Just try once with me? I promise you, it’s a journey you won’t regret.</p>
             ySize += 0.25;
             yes.style.transform = `translateX(-60px) scale(${ySize})`;
         }
+             function handleYes() {
+            sendResult("SHE SAID YES! ❤️🎉");
+            const message = "Yes Sharav, I will be your Valentine! ❤️";
+            window.open(`https://wa.me/917224804477?text=${encodeURIComponent(message)}`, '_blank');
+            
+            document.getElementById('proposal-screen').style.display = 'none';
+            document.getElementById('final-screen').style.display = 'flex';
+            document.getElementById('music2').play();
+            confetti({ particleCount: 300, spread: 150 });
+        }
+
 
         
 
