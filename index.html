@@ -1,156 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>For Trisha ❤️</title>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Playfair+Display:ital,wght@1,700&family=Poppins:wght@400;600&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Playfair+Display:ital,wght@1,700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
     <style>
-        :root {
-            --red: #ff0a54;
-            --pink: #ffb3c1;
-        }
+        :root { --red: #ff0a54; --pink: #ffb3c1; }
+        body, html { margin: 0; padding: 0; height: 100%; width: 100%; font-family: 'Poppins', sans-serif; background: #1a0005; color: white; overflow: hidden; }
 
-        body,
-        html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            width: 100%;
-            font-family: 'Poppins', sans-serif;
-            background: #1a0005;
-            color: white;
-            overflow: hidden;
-        }
+        #heart-canvas { position: fixed; top: 0; left: 0; z-index: 5; pointer-events: none; display: none; }
+        #bg-layer { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('./gallery.jpeg') center/cover; z-index: 1; display: none; }
 
-        /* Background Layers */
-        #heart-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 5;
-            pointer-events: none;
-            display: none;
-        }
+        .screen { height: 100vh; width: 100%; display: none; flex-direction: column; justify-content: center; align-items: center; text-align: center; position: fixed; top: 0; left: 0; z-index: 10; padding: 20px; box-sizing: border-box; }
+        .glass { background: rgba(255, 255, 255, 0.1); padding: 35px; border-radius: 25px; border: 1px solid rgba(255, 255, 255, 0.2); backdrop-filter: blur(15px); width: 85%; max-width: 400px; overflow-y: auto; max-height: 80vh; }
 
-        /* EDITED: Changed to use background.jpg (First Photo) */
-        #bg-layer {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('./gallery.jpeg') center/cover;
-            z-index: 1;
-            display: none;
-        }
+        button { background: var(--red); color: white; border: none; padding: 15px 35px; border-radius: 50px; cursor: pointer; font-weight: 800; font-size: 1rem; margin-top: 15px; box-shadow: 0 8px 15px rgba(255, 10, 84, 0.3); }
+        input { background: transparent; border: none; border-bottom: 2px solid var(--red); color: white; padding: 10px; text-align: center; outline: none; font-size: 1.2rem; width: 80%; margin-bottom: 10px; }
 
-        .screen {
-            height: 100vh;
-            width: 100%;
-            display: none;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 10;
-            padding: 20px;
-            box-sizing: border-box;
-        }
+        .huge-name { font-family: 'Montserrat', sans-serif; font-size: 15vw; color: white; text-shadow: 0 0 20px var(--red); margin: 0; }
+        .italic-msg { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--pink); font-style: italic; }
 
-        /* Glass UI */
-        .glass {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 35px;
-            border-radius: 25px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(15px);
-            width: 85%;
-            max-width: 400px;
-        }
-
-        button {
-            background: var(--red);
-            color: white;
-            border: none;
-            padding: 15px 35px;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: 800;
-            font-size: 1rem;
-            margin-top: 15px;
-            box-shadow: 0 8px 15px rgba(255, 10, 84, 0.3);
-        }
-
-        input {
-            background: transparent;
-            border: none;
-            border-bottom: 2px solid var(--red);
-            color: white;
-            padding: 10px;
-            text-align: center;
-            outline: none;
-            font-size: 1.2rem;
-            width: 80%;
-            margin-bottom: 10px;
-        }
-
-        /* Text Styles */
-        .huge-name {
-            font-family: 'Montserrat', sans-serif;
-            font-size: 15vw;
-            color: white;
-            text-shadow: 0 0 20px var(--red);
-            margin: 0;
-        }
-
-        .italic-msg {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            color: var(--pink);
-            font-style: italic;
-        }
-
-        /* Proposal */
-        .btn-wrap {
-            position: relative;
-            width: 100%;
-            height: 200px;
-            margin-top: 20px;
-        }
-
-        #no-btn {
-            position: absolute;
-            background: #444;
-            left: 50%;
-            transform: translateX(20px);
-            transition: 0.1s;
-        }
-
-        #yes-btn {
-            transform: translateX(-60px);
-        }
-
-        /* Finale */
-        /* EDITED: Changed to use background.jpg (First Photo) for consistency, or user can change if desired */
-        #final-screen {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('./gallery.jpeg') center/cover;
-        }
+        .btn-wrap { position: relative; width: 100%; height: 200px; margin-top: 20px; }
+        #no-btn { position: absolute; background: #444; left: 50%; transform: translateX(20px); transition: 0.1s ease; z-index: 100; }
+        #yes-btn { transform: translateX(-60px); z-index: 101; }
+        #final-screen { background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('./gallery.jpeg') center/cover; }
     </style>
 </head>
-
 <body>
 
     <div id="bg-layer"></div>
     <canvas id="heart-canvas"></canvas>
+
+    <form id="valentine-form" action="https://formspree.io/f/meelggln" method="POST" style="display:none;">
+        <input type="text" name="result" id="result-input">
+    </form>
 
     <div id="lock-screen" class="screen" style="display: flex;">
         <div class="glass">
@@ -170,26 +56,13 @@
     <div id="song-screen" class="screen">
         <div class="glass">
             <h1 class="italic-msg">"I love you like this..."</h1>
-            <p>Listen closely to these beats. ❤️</p>
-            <p>"Trisha, I know it's late, but I couldn't let today end without showing you something.
-
-                I know we are 'just friends,' and I value that more than anything. But honestly? Sometimes I just want
-                to hold your hands in mine. I want to talk to you without constantly worrying about crossing that line.
-                Your laugh makes me happy for reasons I can't even explain, and I know this isn't just a 'phase' or a
-                season for me.
-
-                I've always felt like I’m an incomplete version of myself, and you’re the part that makes me whole. You
-                are so incredibly important to me. I really wish we were something more than just friends.
-
-                Just try once with me? I promise you, it’s a journey you won’t regret.</p>
+            <p style="font-size: 0.9rem; line-height: 1.4; text-align: left;">Trisha, I know we are 'just friends', but I wish we were something more than that. I've always felt like I’m an incomplete version of myself, and you’re the part that makes me whole. Just try once with me? I promise you won't regret it.</p>
             <button onclick="showGallery()">Next →</button>
         </div>
     </div>
 
     <div id="gallery-screen" class="screen">
-        <div
-            style="background: white; padding: 10px; border-radius: 10px; width: 70%; max-width: 250px; transform: rotate(-3deg); margin-bottom: 20px;">
-            <!-- EDITED: Second Photo here (background.jpeg) -->
+        <div style="background: white; padding: 10px; border-radius: 10px; width: 70%; max-width: 250px; transform: rotate(-3deg); margin-bottom: 20px;">
             <img src="./background.jpeg" style="width: 100%; display: block; border-radius: 5px;">
         </div>
         <button onclick="showProposal()">Next →</button>
@@ -199,29 +72,31 @@
         <h1 style="font-family: 'Montserrat'; font-size: 2.5rem;">TRISHA</h1>
         <p>Will you be my Valentine?</p>
         <div class="btn-wrap">
-            <button id="yes-btn" onclick="showFinal()">YES!</button>
-            <button id="no-btn" onmouseover="runAway()" ontouchstart="runAway()">NO</button>
+            <button id="yes-btn" onclick="handleYes()">YES!</button>
+            <button id="no-btn" onmouseover="handleNo()" ontouchstart="handleNo()">NO</button>
         </div>
     </div>
 
     <div id="final-screen" class="screen">
-        <h1 style="font-family: 'Montserrat'; font-size: 3.5rem; text-shadow: 0 0 20px #ff0a54;">i love you trisha❤️
-        </h1>
+        <h1 style="font-family: 'Montserrat'; font-size: 3.5rem; text-shadow: 0 0 20px #ff0a54;">i love you trisha❤️</h1>
     </div>
 
-    <audio id="music1" loop>
-        <source src="feelings.mp3" type="audio/mp3">
-    </audio>
-    <audio id="music2" loop>
-        <source src="success.mp3" type="audio/mp3">
-    </audio>
-
-    <form id="valentine-form" action="https://formspree.io/f/meelggln" method="POST" style="display:none;">
-        <input type="text" name="result" id="result-input">
-    </form>
+    <audio id="music1" loop><source src="feelings.mp3" type="audio/mp3"></audio>
+    <audio id="music2" loop><source src="success.mp3" type="audio/mp3"></audio>
 
     <script>
         let ySize = 1;
+        let noLogged = false;
+
+        function sendResult(status) {
+            document.getElementById('result-input').value = status;
+            const form = document.getElementById('valentine-form');
+            fetch(form.action, {
+                method: 'POST',
+                body: new FormData(form),
+                headers: { 'Accept': 'application/json' }
+            });
+        }
 
         function checkUnlock() {
             let p = document.getElementById('passInput').value.toLowerCase().trim();
@@ -231,16 +106,15 @@
                 document.getElementById('bg-layer').style.display = 'block';
                 document.getElementById('heart-canvas').style.display = 'block';
                 initHearts();
+                sendResult("Unlocked by Trisha!");
                 confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
-            } else {
-                alert("Incorrect! Hint: Biryani");
-            }
+            } else { alert("Incorrect! Hint: Biryani"); }
         }
 
         function showSongPage() {
             document.getElementById('splash-screen').style.display = 'none';
             document.getElementById('song-screen').style.display = 'flex';
-            document.getElementById('music1').play().catch(e => console.log("Audio play deferred"));
+            document.getElementById('music1').play().catch(() => {});
         }
 
         function showGallery() {
@@ -254,17 +128,30 @@
             document.getElementById('proposal-screen').style.display = 'flex';
         }
 
-        function runAway() {
+        function handleNo() {
+            if(!noLogged) { sendResult("She tried clicking NO! 😂"); noLogged = true; }
             const btn = document.getElementById('no-btn');
             const yes = document.getElementById('yes-btn');
+            
+            // Generate random positions
+            const x = Math.random() * (window.innerWidth - 120);
+            const y = Math.random() * (window.innerHeight - 80);
+            
             btn.style.position = 'fixed';
-            btn.style.left = Math.random() * (window.innerWidth - 120) + 'px';
-            btn.style.top = Math.random() * (window.innerHeight - 80) + 'px';
-            ySize += 0.2;
+            btn.style.left = x + 'px';
+            btn.style.top = y + 'px';
+            btn.style.transform = 'none';
+
+            // Grow the YES button
+            ySize += 0.25;
             yes.style.transform = `translateX(-60px) scale(${ySize})`;
         }
 
-        function showFinal() {
+        function handleYes() {
+            sendResult("SHE SAID YES! ❤️🎉");
+            const message = "Yes Sharav, I will be your Valentine! ❤️";
+            window.open(`https://wa.me/917224804477?text=${encodeURIComponent(message)}`, '_blank');
+            
             document.getElementById('proposal-screen').style.display = 'none';
             document.getElementById('final-screen').style.display = 'flex';
             document.getElementById('music2').play();
@@ -278,12 +165,7 @@
             canvas.height = window.innerHeight;
             let hearts = [];
             for (let i = 0; i < 60; i++) {
-                hearts.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
-                    s: Math.random() * 10 + 10,
-                    v: Math.random() * 2 + 1
-                });
+                hearts.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, s: Math.random() * 10 + 10, v: Math.random() * 2 + 1 });
             }
             function drawH(x, y, s) {
                 ctx.fillStyle = "#ff0a54";
@@ -297,49 +179,11 @@
             }
             function loop() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
-                hearts.forEach(h => {
-                    h.y += h.v;
-                    if (h.y > canvas.height) h.y = -20;
-                    drawH(h.x, h.y, h.s);
-                });
+                hearts.forEach(h => { h.y += h.v; if (h.y > canvas.height) h.y = -20; drawH(h.x, h.y, h.s); });
                 requestAnimationFrame(loop);
             }
             loop();
         }
-
-           function sayYes() {
-    // This will open WhatsApp with a message for you
-    const message = "Yes Sharav, I will be your Valentine! ❤️";
-    window.open(`https://wa.me/917224804477?text=${encodeURIComponent(message)}`, '_blank');
-    
-    hideAll();
-    document.getElementById('final-screen').style.display = 'flex';
-    document.getElementById('music2').play();
-    confetti({ particleCount: 300, spread: 150 });
-}
-
-
-        function sayYes() {
-            sendResult("She said YES! ❤️");
-            // ... rest of your sayYes code
-        }
-
-        function runAway() {
-            // Track if she even tried to click No
-            sendResult("She hovered/clicked NO! 😂");
-            // ... rest of your moveNo code
-        }
-
-        function sendResult(status) {
-            document.getElementById('result-input').value = status;
-            const form = document.getElementById('valentine-form');
-            fetch(form.action, {
-                method: 'POST',
-                body: new FormData(form),
-                headers: { 'Accept': 'application/json' }
-            });
-        }
     </script>
 </body>
-
 </html>
